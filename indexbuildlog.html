@@ -213,7 +213,8 @@
     </ul>
     <li>Use arrow keys to navigate to "Advanced Options" and then hit enter</li>
     <li>Navigate to "I2C" and hit enter and select the "Yes" option</li>
-    <li>Lastly, download the <a href="Documents/example.py" download>example.py</a> python script and with a USB flash drive transfer it to the desktop on your Pi</li>
+    <li>Download the <a href="Documents/example.py" download>example.py</a> python script and with a USB flash drive transfer it to the desktop on your Pi</li>
+    <li>Once this is done make sure to shut down your Raspberry Pi and disconnect it from power</li>
   </ul>
 
   <p>Congrats, you have just completed step 1 and you can now move on to step 2.</p>
@@ -226,6 +227,7 @@
   <ul>
     <li>Download and print the Humber PCB, I printed mine off at Humber College at the prototype lab</li>
     <li>Solder the Humber PCB according to the schematic</li>
+    <li>The parts you will need for this circuit board are indicated on the board and schmatic file, if you printed it off at the prototype lab at Humber College then they will provide you with the parts needed.</li>
   </ul>
   <p>Download the <a href="HSHV4-student version.brd" download>board file</a> <br>
     Download the <a href="HSHV4-student version.sch" download>schematic file</a></p>
@@ -235,6 +237,12 @@
   <ul>
     <li>Download and print the custom PCB, I printed mine off at Humber College at the prototype lab</li>
     <li>Solder the custom PCB according to the schematic</li>
+    <li>The parts you will need for this PCB are:</li>
+    <ul>
+      <li>5-pin Female Header x 2</li>
+      <li>GPIO Header x 1</li>
+      <li>10K ohm resistor (from Raspberry Pi kit) x 1</li>
+    </ul>
   </ul>
   <p>Download the <a href="solarpanel.brd" download>board file</a> <br>
     Download the <a href="solarpanel.sch" download>schematic file</a></p>
@@ -257,24 +265,87 @@
  </SECTION>
 
  <SECTION ID="Step_3">
-  <H3>Step 3: Testing Sensors</H3>
+  <H3>Step 3: Testing Sensors/Circuit Assembly</H3>
 
-  <p>In this step you will be using the Barometric Pressure Sensor and the </p>
+  <p>In this step you will be using the BMP180, YL-40 and the DHT-11 sensors. Keep in mind to check to see your pinouts when you connect your sensors to the system as there is a possibility that you can damage your sensors, your Raspberry Pi and or your PCBs that you worked so hard to put together.</p>
+
+  <ul>
+    <li>Connect your Humber PCB to the Raspberry Pi, making sure that the pin 1 on the PCB matched the pin 1 on the Raspberry Pi</li>
+    <li>Connect the BMP180 to the RTC header on the Humber PCB, making sure that V, G, SC and SA are all connected properly to the header</li>
+    <li>Connect the YL-40 to the ADC header on the Humber PCB, making sure that V, G, SC and SA are all connected properly to the header</li>
+    <li>Once these components are connected properly, turn your Pi on by pluging in the power, opening up a command line terminal and issuing the following command:</li>
+    <ul>
+      <li><mark><strong>i2cdetect -y 1</strong></mark></li>
+    </ul>
+    <li>If these two sensors are connected properly you should see the following output:</li>
+    <ul>
+      <li><mark><strong>0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f <br>
+                        00:          -- -- -- -- -- -- -- -- -- -- -- -- -- <br>
+                        10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>
+                        20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>
+                        30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>
+                        40: -- -- -- -- -- -- -- -- 48 -- -- -- -- -- -- -- <br>
+                        50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>
+                        60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- <br>
+                        70: -- -- -- -- -- -- -- 77</strong></mark></li>
+    </ul>
+    <li>If you don't recieve this output then make sure to check two things:</li>
+    <ul>
+      <li>Check to make sure that you connected everything properly, ensuring that the pinout on your sensors match the input of the correct headers</li>
+      <li>Check to make sure that your chips aren't damaged or have malfunctioned</li>
+    </ul>
+    <li>Once that is all done make sure to shut down the Raspberry Pi and disconnect it from power. Then connect the Custom PCB to the Humber PCB GPIO header, also making sure that pin one lines up with pin 1 on the Humber PCB.</li>
+    <li>To ensure you have installed this part correctly it should be sitting ontop of the Humber PCB and sticking out away from the Pi, unlike the Humber PCB which doesn't stick out away from the Pi.</li>
+    <li>After you have double checked and connected it properly, connect the DHT-11 to the Custom PCB</li>
+    <li>Make sure to connect it to the proper 5-pin header, use the board and schematic file to locate the proper header. Also make sure that the V, G and S pinout on the DHT-11 also match the proper holes. This board has been made in such a way to support different DHT-11 pinouts</li>
+    <li>Once you are for certain that it has been connected properly, plug the solar panel into the V and G on the other 5-pin header</li>
+    <li>Make sure to follow the board and schematic files close as two of the headers are not connected to anything</li>
+    <li>After that use a wire to connect the AD2 pin on the YL-40 to the proper header on the same 5-pin header as the solar panel</li>
+    <li>Make sure the use the board and schematic file to locate the proper header</li>
+    <li>Lastly once you have everything connected, properly power on the Raspberry Pi</li>
+    <li>Navigate to the desktop with the follwing command:</li>
+    <ul>
+      <li><mark><strong>cd Desktop</strong></mark></li>
+    </ul>
+    <li>Then issue the following command:</li>
+    <ul>
+      <li><mark><strong>sudo python example.py</strong></mark></li>
+    </ul>
+    <li>This will run the final code, to ensure everything works properly follow these:</li>
+    <ul>
+      <li>Ensure that the barometric pressure readings are somewhat accurate, use the internet to check, this will ensure that the BMP180 is working properly</li>
+      <li>Ensure that the voltage reading from the solar panel is not constantly zero, you can test this by shining a bright light on the solar cell, this will ensure that the YL-40 is working properly</li>
+      <li>Ensure that the temperature reading is somewhat accurate, use you local thermometer to check, this will ensure that the DHT-11 is working properly</li>
+      <li>If one of the following are not working as intended you can also look at the LED on the Humber PCB to look for a status. If the light is red, it is indicating that one or more of the sensors are not working or connected properly. If it is green then it is indicating that everything is good</li>
+    </ul>
+    <p>Congrats you are all done step 3 and you are over half way done, good job! Make sure to shut down </p>
+  </ul>
   
  </SECTION>
 
  <SECTION ID="Step_4">
-  <H3>Step 4</H3>
-  
- </SECTION>
+  <H3>Step 4: Box Creation</H3>
 
- <SECTION ID="Step_5">
-  <H3>Step 5</H3>
+  <p>In this step you will be creating the box to put your project into. After this step is completed you will be completely done with the project so keep up the good work! It is important to note that you will need access to a laser cutter and the Coral Draw program. If you don't have access to either of these things then make sure to visit Humber College as they have computers with this software installed. Also you will need acrylic </p>
+  <ul>
+    <li>First, download the <a href="Documents/solar_box_sal_v16.cdr" download>project box file</a></li>
+    <li>Open the file in Coral Draw since it is a Coral Draw file, if you don't have this program on your computer then make sure to visit Humber College as they have computers with this software installed</li>
+    <li>Use the print option under the file tab to send your file to a laser cutter</li>
+    <li>Once the acrylic box has been cut out then you can glue and or tape it together, I reccomend tape for the average user as you need a special glue in order to glue the acrylic together. If you are at Humber College anyways, then just glue your box together as it will look cleaner. Make sure to leave the top unglued/untaped as it is the only way you can get access to the Raspberry Pi</li>
+    <li>After you have glued it all together then you can screw the standoffs to the four holes in the bottom of the box</li>
+    <li>Then you can screw your Raspberry Pi to the bottom of the box so that it doesn't move inside the box</li>
+    <li>You will have to unplug the solar panel from the custom PCB and the power cable to put the Raspberry Pi, but make sure to route the solar panel cables trought the holes in the side of the case to the same location and replug your Pi back in if you want to turn it back on. </li>
+    <li>Screw the Raspberry Pi to the standoff and you should be all finished</li>
+  </ul>
+
+  <p>Congrats you have completed the project!</p>
   
  </SECTION>
 
  <SECTION ID="Conclusion">
   <H3>Conclusion</H3>
+
+  <p>This project will take you about 3 weeks to complete with a busy schedule and requires a bit more knowledge of computers than the average person. By following these instructions you should be able to reproduce the project. The only downside or holdback is that this project requires big expensive equipement (like the laser cutter or PCB printer) to reporduce and if you don't have access to Humber's or any other equivilent equipment, you won't be able to replicate this project 100%. That said if you get crafty and know a little bit about circuits and computers then you should be able to replicate the circuit from a bread board and atleast have it working. If this project were to become mass producable then I would change the PCB design to be condensed into one PCB so that it is easier to manufacture.</p> 
 
  </SECTION>
 
