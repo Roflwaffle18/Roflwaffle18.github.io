@@ -1,0 +1,281 @@
+<ARTICLE ID="Article_1">
+ <HEADER ID="Header_Article_1">
+  <H2>Solar Panel Project Build Instructions</H2>
+ </HEADER>
+
+<SECTION ID="Intro">
+  <H3>Introduction</H3>
+
+  <p>Welcome to Salvatore's Build Instructions page. This page contains all the knowledge nesscessary in order to reporduce the solar panel project. The project was created alongside Richard Burak and Steven Spiteri. An individual should be able to reporduce our project by following these instructions. To anyone actually reporducing our project, I wish you the best of luck in your efforts.</p>
+
+ </SECTION>
+
+ <SECTION ID="Sys_Diagram">
+  <H3>System Diagram</H3>
+
+  <p>The goal of this project is to get data from a solar panel and display it to a user. It is important to know how the system work to assist in your own assembly of this project. Also important to note that following these instruction will allow you to view the data remotely through SSH and VNC.
+
+  <img src="Documents/System-Diagram.png">
+  </p>
+
+ </SECTION>
+
+<SECTION ID="Budget">
+  <H3>Budget</H3>
+
+  <p>The table below lists the required parts to complete this project. Links have been provided for parts that can be bought online. You could alternatively get most of these parts in person from Sayal Electronics. Some parts can be aquired from Humber College for rental use, these include items such as the soldering iron and soldering iron holder. They have been added regardless for your convienence along with safety glasses to protect yourself. </p>
+
+  <table>
+  <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Cost</th>
+    <th>Link</th>
+  </tr>
+  <tr>
+    <td>Raspberry Pi 3 Starter Kit</td>
+    <td>1</td>
+    <td>$119.99</td>
+    <td><a href="https://www.amazon.ca/CanaKit-Raspberry-Ultimate-Starter-Kit/dp/B01CCF9BYG/ref=sr_1_3?ie=UTF8&qid=1474395691&sr=8-3&keywords=raspberry+pi">Link</a></td>
+  </tr>
+  <tr>
+    <td>DHT-11 Sensor Brick</td>
+    <td>1</td>
+    <td>$4.04</td>
+    <td><a href="http://www.robotshop.com/ca/en/electronic-brick-humidity-temperature-sensor.html">Link</a></td>
+  </tr>
+  <tr>
+    <td>Barometric Pressure Sensor (BMP180)</td>
+    <td>1</td>
+    <td>$8.33</td>
+    <td><a href="http://www.robotshop.com/ca/en/octopus-barometric-pressure-sensor-brick.html">Link</a></td>
+  </tr>
+  <tr>
+    <td>Sensor Cluster Chip (YL-40)</td>
+    <td>1</td>
+    <td>$4.83</td>
+    <td><a href="http://www.dx.com/p/pcf8591-8-bit-a-d-d-a-converter-module-150190#.WEb-6XcZNok">Link</a></td>
+  </tr>
+  <tr>
+    <td>Solar Cell (6V)</td>
+    <td>1</td>
+    <td>$5.95</td>
+    <td><a href="http://sayal.com/zinc/zinc_SEARCH.asp?txtSEARCH=237344">Link</a></td>
+  </tr>
+  <tr>
+    <td>Soldering Iron (25W)</td>
+    <td>1</td>
+    <td>$6.80</td>
+    <td><a href="http://www.robotshop.com/ca/en/elenco-sr-1-standard-25w-pencil-soldering-iron.html">Link</a></td>
+  </tr>
+  <tr>
+    <td>Soldering Iron Holder</td>
+    <td>1</td>
+    <td>$4.56</td>
+    <td><a href="http://www.robotshop.com/ca/en/elenco-soldering-iron-holder.html">Link</a></td>
+  </tr>
+  <tr>
+    <td>Lead Free Solder</td>
+    <td>1</td>
+    <td>$4.49</td>
+    <td><a href="http://www.robotshop.com/ca/en/lead-free-solder-wire-10g-tube.html">Link</a></td>
+  </tr>
+  <tr>
+    <td>Humber PCB Components Kit</td>
+    <td>1</td>
+    <td>$40.00 (Approx.)</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td>Custom PCB</td>
+    <td>1</td>
+    <td>$30.00 (Approx.)</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td>5-pin PCB Female Header</td>
+    <td>2</td>
+    <td>$1.78</td>
+    <td><a href="http://www.digikey.ca/product-detail/en/sullins-connector-solutions/PPTC051LFBN-RC/S6103-ND/807239">Link</a></td>
+  </tr>
+  <tr>
+    <td>GPIO Header</td>
+    <td>1</td>
+    <td>$2.17</td>
+    <td><a href="http://www.digikey.ca/product-search/en?keywords=GPIO%20Header">Link</a></td>
+  </tr>
+  <tr>
+    <td>Laser-cut Acrylic Box</td>
+    <td>1</td>
+    <td>Unknown</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td>Digital Multimeter</td>
+    <td>1</td>
+    <td>$14.59</td>
+    <td><a href="http://www.robotshop.com/ca/en/m-1000e-compact-digital-multimeter.html">Link</a></td>
+  </tr>
+  <tr>
+    <td>Safety Glasses</td>
+    <td>1</td>
+    <td>$3.99</td>
+    <td><a href="https://www.amazon.ca/Safety-Works-817691-Economical-Glasses/dp/B000BO6RWK/ref=sr_1_7?ie=UTF8&qid=1481008556&sr=8-7&keywords=safety+glasses">Link</a></td>
+  </tr>
+  </table>
+ </SECTION>
+
+ <SECTION ID="Time_Commit">
+  <H3>Time Commmitment</H3>
+
+  <p>The table below lists the estimated completion time for the various steps in the instructions. This is only an approximation of the time required in order to complete each task so your time may vary. The tasks with the highest amount of time variance are pointed out in the table as well. The project can be completed in about 3 weeks if you have a busy schedule. It is also important that you try to follow the tasks in the order you see them as it is the intended order to complete the tasks and it may take more time if you don't.</p>
+
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Required Time(Approx.)</th>
+    </tr>
+    <tr>
+      <td>Ordering Parts</td>
+      <td>1 hr.</td>
+    </tr>
+    <tr>
+      <td>Parts Delivery</td>
+      <td>1 week (Your time may vary)</td>
+    </tr>
+    <tr>
+      <td>Raspberry Pi Setup</td>
+      <td>2 hr.</td>
+    </tr>
+    <tr>
+      <td>Printing PCBs</td>
+      <td>N/A (Depends on your printing device)</td>
+    </tr>
+    <tr>
+      <td>Soldering PCBs</td>
+      <td>3 hr.</td>
+    </tr>
+    <tr>
+      <td>Testing PCBs</td>
+      <td>30 min.</td>
+    </tr>
+    <tr>
+      <td>Testing Sensors</td>
+      <td>2 hr.</td>
+    </tr>
+    <tr>
+      <td>Connecting Circuits</td>
+      <td>10 min.</td>
+    </tr>
+    <tr>
+      <td>Lazer-cutting Box</td>
+      <td>10 min. (Depends on your printing device)</td>
+    </tr>
+    <tr>
+      <td>Box Assembly</td>
+      <td>20 min.</td>
+    </tr>
+    <tr>
+      <td>Mount Project to Box</td>
+      <td>10 min.</td>
+    </tr>
+  </table>
+ </SECTION>
+
+<SECTION ID="Step_1">
+  <H3>Step 1: Setup The Raspberry Pi</H3>
+
+  <p>For this step you will need your Raspberry Pi 3 so make sure you have it. Once this step is over you will be able to start using your Raspberry Pi 3.</p>
+
+  <ul>
+    <li>Connect your Raspberry Pi 3 to a diaplay via HDMI and also connect a mouse and keyboard via USB type A connector</li>
+    <li>Insert micro SD card that comes with your Pi into the micro SD card slot</li>
+    <li>Connect power to your Pi via the micro USB connector with the included power cable</li>
+    <li>Once power comes on, configure your Pi to use Raspbian OS (on screen instructions will appear)</li>
+    <li>Once booted into Raspbian, go to the top right corner of the screen and select the network connection you would like to use (skip this if you are using a wired connection)</li>
+    <li>Record the IP address of your device by hovering over the network symbol at the top right of the screen (important for later use)</li>
+    <li>Once connected to the internet, open up the command line terminal and update your Pi to the latest packages by issuing the folling command:</li>
+    <ul>
+      <li><mark><strong>sudo apt-get update</strong></mark></li>
+    </ul>
+    <li>Once the updates are done installing, issue the following command to ensure SSH is enabled:</li>
+    <ul>
+      <li><mark><strong>mv /boot/boot_enable_ssh.rc /boot/boot.rc</strong></mark></li>
+    </ul>
+    <li>After that issue the following two commands to install and setup VNC (software used to remotely connect with GUI to the Pi):</li>
+    <ul>
+      <li><mark><strong>sudo install tightvncserver</strong></mark></li>
+      <li><mark><strong>tightvncserver</strong></mark></li>
+    </ul>
+    <li>Setup a password for VNC when prompted and then run the following command to start the process to enabling I2C:</li>
+    <ul>
+      <li><mark><strong>sudo raspi-config</strong></mark></li>
+    </ul>
+    <li>Use arrow keys to navigate to "Advanced Options" and then hit enter</li>
+    <li>Navigate to "I2C" and hit enter and select the "Yes" option</li>
+    <li>Lastly, download the <a href="Documents/example.py" download>example.py</a> python script and with a USB flash drive transfer it to the desktop on your Pi</li>
+  </ul>
+
+  <p>Congrats, you have just completed step 1 and you can now move on to step 2.</p>
+
+ </SECTION>
+
+<SECTION ID="Step_2">
+  <H3>Step 2: Soldering/Testing the PCBs</H3>
+
+  <ul>
+    <li>Download and print the Humber PCB, I printed mine off at Humber College at the prototype lab</li>
+    <li>Solder the Humber PCB according to the schematic</li>
+  </ul>
+  <p>Download the <a href="HSHV4-student version.brd" download>board file</a> <br>
+    Download the <a href="HSHV4-student version.sch" download>schematic file</a></p>
+  <img src="Documents/Board-Picture.png">
+  <img src="Documents/Schematic-Picture.png">
+
+  <ul>
+    <li>Download and print the custom PCB, I printed mine off at Humber College at the prototype lab</li>
+    <li>Solder the custom PCB according to the schematic</li>
+  </ul>
+  <p>Download the <a href="solarpanel.brd" download>board file</a> <br>
+    Download the <a href="solarpanel.sch" download>schematic file</a></p>
+  <img src="Documents/SolarPanelBoard-Picture.png">
+  <img src="Documents/SolarPanelSchematic-Picture.png">
+
+  <ul>
+    <li>To test out your PCBs, use a digital multimeter to measure the resistance of the pads you soldered</li>
+    <li>Use the circuit schematic and board file to know where you need to check</li>
+    <li>If there is zero resistance between connections in the circuit you should be good</li>
+    <li>To double check, plug 3.3V into your custom PCBs and use the digital multimeter and check again</li>
+    <li>If there is still zero resistance between connections in the PCB then you are good and it is safe to plug into your Raspberry Pi</li>
+    <li>If you happen to get infinite resistance between connections then that means that there is a problem in your PCB, if that happens use these hints to troubleshoot:</li>
+    <ul>
+      <li>Check to make sure that your solder is on the pad and isn't flowing over as this causes a short circuit</li>
+      <li>Check to make sure that all the pads are soldered as this will cause the electricity to not flow if there is no connection</li>
+    </ul> 
+  </ul>
+  
+ </SECTION>
+
+ <SECTION ID="Step_3">
+  <H3>Step 3: Testing Sensors</H3>
+
+  <p>In this step you will be using the Barometric Pressure Sensor and the </p>
+  
+ </SECTION>
+
+ <SECTION ID="Step_4">
+  <H3>Step 4</H3>
+  
+ </SECTION>
+
+ <SECTION ID="Step_5">
+  <H3>Step 5</H3>
+  
+ </SECTION>
+
+ <SECTION ID="Conclusion">
+  <H3>Conclusion</H3>
+
+ </SECTION>
+
+</ARTICLE>
